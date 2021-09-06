@@ -1,0 +1,50 @@
+# Usage:
+# docker-compose build --build-arg r5version=$(cat build/version.txt)
+# docker-compose up 
+version: '3'
+services:
+  r5:
+    container_name: r5
+    # build: .
+    build:
+      context: .
+      dockerfile: Dockerfile_r5
+    # image: ghcr.io/conveyal/r5:latest
+    depends_on:
+      - mongo-r5
+    links:
+      - mongo-r5
+    ports:
+      - "7070:7070"
+    environment:
+      # https://github.com/ufoscout/docker-compose-wait
+      WAIT_HOSTS: mongo-r5:27017  
+    # TODO volumes for backend cache directory
+  ui:
+    container_name: ui-r5
+    depends_on:
+      - mongo-r5
+    build: 
+      context: .
+      dockerfile: Dockerfile_ui
+    # image: ghcr.io/conveyal/analysis-ui:latest
+    # image: 037a38bb2cdf
+    ports:
+      - "3000:3000"
+    links:
+      - r5
+      - mongo-r5
+    # Map in a config file with mapbox keys, telling the UI to contact host (container) r5
+    volumes:
+      - ./.env:/app/.env:ro
+  mongo-r5:
+    container_name: mongo-r5
+    image: mongo
+    restart: always
+    volumes:
+      - mongo-volume:/data/db:rw
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo-volume:
