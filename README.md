@@ -40,4 +40,5 @@ Run the stack
 docker-compose up
 ```
 
+Open the app in the browser and enjoy it [http://localhost:3000](http://localhost:3000)
 
