@@ -47,4 +47,4 @@ services:
       - "27017:27017"
 
 volumes:
-  mongo-volume:
+  mongo-volume-r5:
