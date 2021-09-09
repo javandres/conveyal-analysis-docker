@@ -18,7 +18,7 @@ services:
       - "7070:7070"
     environment:
       # https://github.com/ufoscout/docker-compose-wait
-      WAIT_HOSTS: mongo-r5:27017  
+      WAIT_HOSTS: mongo-r5:27018
     # TODO volumes for backend cache directory
   ui:
     container_name: ui-r5
@@ -44,7 +44,7 @@ services:
     volumes:
       - mongo-volume-r5:/data/db:rw
     ports:
-      - "27017:27017"
+      - "27018:27017"
 
 volumes:
   mongo-volume-r5:
