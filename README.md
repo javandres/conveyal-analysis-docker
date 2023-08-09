@@ -22,6 +22,13 @@ Clone the [R5](https://github.com/conveyal/r5): a routing engine which acts as t
 git clone https://github.com/conveyal/r5.git
 ```
 
+Checkout to R5 v6.4 (the compatible R5 version for the UI)
+
+```
+git checkout v6.4
+```
+
+
 Clone the [Analysis UI](https://github.com/conveyal/analysis-ui): the user interface
 
 ```
